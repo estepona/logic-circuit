@@ -1,7 +1,9 @@
 from typing import Set
 
+from .logic_circuit import LogicCircuit
 
-class FullAdder():
+
+class FullAdder(LogicCircuit):
 
     def add(self, a: int, b: int) -> int:
         v1: str = bin(a)[2:]
@@ -56,61 +58,3 @@ class FullAdder():
         print(f'\nfinal reslut: adding {a} and {b} in binary is {result_bin}, converted to integer is {result_int}')
 
         return result_int
-
-    @staticmethod
-    def is_binary(n: str) -> bool:
-        if n == '0' or n == '1':
-            return True
-        else:
-            return False
-    
-    def _pad_start(self, n: str, size: int = 0, pad_with: str = '0') -> str:
-        return size * pad_with + n
-    
-    def _pad_end(self, n: str, size: int = 0, pad_with: str = '0') -> str:
-        return n + size * pad_with
-    
-    def _pad_two_to_same_len(self, a: str, b: str, pad_with: str = '0', pad_to: str = 'start') -> Set[str]:
-        l_a = len(a)
-        l_b = len(b)
-        dl = abs(l_a - l_b)
-
-        if pad_to == 'start':
-            if l_a > l_b:
-                b = self._pad_start(b, dl, pad_with)
-            elif l_a < l_b:
-                a = self._pad_start(a, dl, pad_with)
-
-        elif pad_to == 'end':
-            if l_a > l_b:
-                b = self._pad_end(b, dl, pad_with)
-            elif l_a < l_b:
-                a = self._pad_end(a, dl, pad_with)
-        
-        return (a, b)
-
-    def _trim_start(self, n: str) -> str:
-        for i in range(len(n)):
-            if n[i] == '1':
-                pos = i
-                break
-
-        return n[pos:]
-
-    def _and(self, a: str, b: str) -> str:
-        assert FullAdder.is_binary(a), ValueError('input should be 0 or 1')
-        assert FullAdder.is_binary(b), ValueError('input should be 0 or 1')
-
-        if a == '1' and b == '1':
-            return '1'
-        else:
-            return '0'
-
-    def _xor(self, a: str, b: str) -> str:
-        assert FullAdder.is_binary(a), ValueError('input should be 0 or 1')
-        assert FullAdder.is_binary(b), ValueError('input should be 0 or 1')
-
-        if a != b:
-            return '1'
-        else:
-            return '0'

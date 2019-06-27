@@ -6,7 +6,7 @@ simulation of essential combinational logic circuits with boolean algebra
 ## Full Adder
 
 ```console
-$ python main.py -a -n 5 11
+$ python main.py --add --nums 5 11
 adding 5 and 11...
     binary of  5: 0101
     binary of 11: 1011
