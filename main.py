@@ -1,18 +1,25 @@
 import argparse
 
-from lib.full_adder import FullAdder
+from lib import HalfAdder, FullAdder
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--add', '-a', action='store_true', help='add operation')
-    parser.add_argument('--nums', '-n', metavar='N', type=int, nargs=2, help='an integer for the accumulator')
+    op_group = parser.add_mutually_exclusive_group()
+    op_group.add_argument('--half-add', '-ha', action='store_true')
+    op_group.add_argument('--full-add', '-fa', action='store_true')
+    op_group.add_argument('--half-subtract', '-hs', action='store_true')
+    op_group.add_argument('--full-subtract', '-fs', action='store_true')
+    parser.add_argument('--nums', '-n', metavar='N', type=int, nargs=2, help='2 integers for the accumulator')
     args = parser.parse_args()
     
-    if args.add:
-        a = args.nums[0]
-        b = args.nums[1]
-
+    a = args.nums[0]
+    b = args.nums[1]
+    
+    if args.half_add:
+        ha = HalfAdder()
+        ha.add(a, b)
+    elif args.full_add:
         fa = FullAdder()
         fa.add(a, b)
 

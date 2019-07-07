@@ -4,6 +4,9 @@ from .logic_circuit import LogicCircuit
 
 
 class FullAdder(LogicCircuit):
+    """
+    TODO: truth table
+    """
 
     def add(self, a: int, b: int) -> int:
         v1: str = bin(a)[2:]
@@ -13,7 +16,7 @@ class FullAdder(LogicCircuit):
         v1, v2 = self._pad_two_to_same_len(v1, v2)
         v1_r, v2_r = v1[::-1], v2[::-1]
         
-        print(f'adding {a} and {b}...\n'
+        print(f'full adder adding {a} and {b}...\n'
               f'    binary of {sa}: {v1}\n'
               f'    binary of {sb}: {v2}\n')
 

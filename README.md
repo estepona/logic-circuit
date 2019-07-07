@@ -3,11 +3,27 @@ simulation of essential combinational logic circuits with boolean algebra
 
 # Examples
 
+## Half Adder
+```console
+$python main.py --half-add --nums 1 1
+half adder adding 1 and 1...
+
+  1
+  1
++ ^
+ --
+  0 (1)
+calculating sum digit:
+    XOR of 1 and 1 is 0
+calculating carry-out digit:
+    AND of 1 and 1 is 1
+```
+
 ## Full Adder
 
 ```console
 $ python main.py --add --nums 5 11
-adding 5 and 11...
+full adder adding 5 and 11...
     binary of  5: 0101
     binary of 11: 1011
 
