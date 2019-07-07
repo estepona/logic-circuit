@@ -22,7 +22,7 @@ calculating carry-out digit:
 ## Full Adder
 
 ```console
-$ python main.py --add --nums 5 11
+$ python main.py --full-add --nums 5 11
 full adder adding 5 and 11...
     binary of  5: 0101
     binary of 11: 1011
