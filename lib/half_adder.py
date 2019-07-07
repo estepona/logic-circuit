@@ -7,12 +7,16 @@ class HalfAdder(LogicCircuit):
     """
     Truth table:
 
-    A  B | Sum  Carry
-    -----------------
-    0  0 |  0     0
-    0  1 |  1     0
-    1  0 |  1     0
-    1  1 |  0     1
+    A  B | Sum  Carry-Out
+    ---------------------
+    0  0 |  0       0
+    0  1 |  1       0
+    1  0 |  1       0
+    1  1 |  0       1
+
+    Equation:
+    - Sum = A xor B
+    - Carry-Out = A and B
 
     Ref:
     - https://en.wikipedia.org/wiki/Adder_(electronics)
@@ -20,27 +24,35 @@ class HalfAdder(LogicCircuit):
     """
 
     def add(self, a: int, b: int) -> Tuple[int]:
-        sa = str(a)
-        sb = str(b)
+        str_a = str(a)
+        str_b = str(b)
 
-        assert LogicCircuit.is_binary(sa), ValueError('input should be 0 or 1')
-        assert LogicCircuit.is_binary(sb), ValueError('input should be 0 or 1')
-
-        print(f'half adder adding {a} and {b}...\n')
-
-        _sum = self._xor(sa, sb)
-        _carry = self._and(sa, sb)
+        assert LogicCircuit.is_binary(str_a), ValueError('input should be 0 or 1')
+        assert LogicCircuit.is_binary(str_b), ValueError('input should be 0 or 1')
 
         print(
-            f'{"  " + sa}\n'
-            f'{"  " + sb}\n'
-            f'+ ^\n'
-            f' --\n'
-            f'{"  " + _sum} ({_carry})\n'
-            f'calculating sum digit:\n'
-            f'    XOR of {sa} and {sb} is {_sum}\n'
-            f'calculating carry-out digit:\n'
-            f'    AND of {sa} and {sb} is {_carry}'
+            f'Half Adder adding {a} and {b}...\n'
+            f'\n'
+            f'Operators:\n'
+            f'    & = AND\n'
+            f'    ^ = XOR\n'
+            f'\n'
+            f'Equations:\n'
+            f'    Sum = A ^ B\n'
+            f'    Carry-Out = A & B\n'
         )
 
-        return (int(_sum), int(_carry))
+        _sum = self._xor(str_a, str_b)
+        _carry_out = self._and(str_a, str_b)
+
+        print(
+            f'{"  " + str_a}\n'
+            f'{"  " + str_b}\n'
+            f'+ ^\n'
+            f' --\n'
+            f'{"  " + _sum} ({_carry_out})\n'
+            f'sum       = {str_a} XOR {str_b} = {_sum}\n'
+            f'carry-out = {str_a} AND {str_b} = {_carry_out}'
+        )
+
+        return (int(_sum), int(_carry_out))

@@ -45,6 +45,12 @@ class LogicCircuit:
 
         return str(int(a) & int(b))
 
+    def _or(self, a: str, b: str) -> str:
+        assert LogicCircuit.is_binary(a), ValueError('input should be 0 or 1')
+        assert LogicCircuit.is_binary(b), ValueError('input should be 0 or 1')
+
+        return str(int(a) | int(b))
+
     def _xor(self, a: str, b: str) -> str:
         assert LogicCircuit.is_binary(a), ValueError('input should be 0 or 1')
         assert LogicCircuit.is_binary(b), ValueError('input should be 0 or 1')

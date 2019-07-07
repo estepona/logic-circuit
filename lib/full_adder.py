@@ -5,55 +5,92 @@ from .logic_circuit import LogicCircuit
 
 class FullAdder(LogicCircuit):
     """
-    TODO: truth table
+    Truth table:
+
+    A  B  Carry-In | Sum  Carry-Out
+    -------------------------------
+    0  0      0    |  0       0
+    0  0      1    |  1       0
+    0  1      0    |  1       0
+    0  1      1    |  0       1
+    1  0      0    |  1       0
+    1  0      1    |  0       1
+    1  1      0    |  0       1
+    1  1      1    |  1       1
+
+    Equation:
+    - Sum = A xor B xor Carry-In
+    - Carry-Out = (A and B) or ((A xor B) and Carry-In)
+
+    Ref:
+    - https://en.wikipedia.org/wiki/Adder_(electronics)
+    - https://www.youtube.com/watch?v=RK3P9L2ZXk4
     """
 
     def add(self, a: int, b: int) -> int:
-        v1: str = bin(a)[2:]
-        v2: str = bin(b)[2:]
+        bin_a = bin(a)[2:]
+        bin_b = bin(b)[2:]
 
-        sa, sb = self._pad_two_to_same_len(str(a), str(b), ' ', 'start')
-        v1, v2 = self._pad_two_to_same_len(v1, v2)
-        v1_r, v2_r = v1[::-1], v2[::-1]
+        str_a, str_b = self._pad_two_to_same_len(str(a), str(b), ' ', 'start')
+        bin_a, bin_b = self._pad_two_to_same_len(bin_a, bin_b)
+        bin_a_re, bin_b_re = bin_a[::-1], bin_b[::-1]
         
-        print(f'full adder adding {a} and {b}...\n'
-              f'    binary of {sa}: {v1}\n'
-              f'    binary of {sb}: {v2}\n')
+        print(
+            f'Full Adder adding {a} and {b}...\n'
+            f'    binary of {str_a}: {bin_a}\n'
+            f'    binary of {str_b}: {bin_b}\n'
+            f'\n'
+            f'Operators:\n'
+            f'    & = AND\n'
+            f'    ^ = XOR\n'
+            f'    | = OR\n'
+            f'\n'
+            f'Equations:\n'
+            f'    Sum = A ^ B ^ Carry-In\n'
+            f'    Carry-Out = (A & B) | ((A ^ B) & Carry-In)\n'
+        )
 
-        lv = len(v1)
+        n = len(bin_a)
         result = ''
-        _i = '0'
-        _o1 = '0'
 
-        for i in range(lv):
-            print(f'step {i+1}:\n'
-                  f'    {"  " + v1}\n'
-                  f'    {"  " + v2}\n'
-                  f'    {"+ " + " " * (lv-i-1)}^')
+        _sum = '0'
+        _carry_in = '0'
+        _carry_out = '0'
 
-            _s1 = self._xor(v1_r[i], v2_r[i])
-            _s2 = self._xor(_s1, _i)
+        for i in range(n):
+            print(
+                f'step {i+1}:\n'
+                f'    {"  " + bin_a}\n'
+                f'    {"  " + bin_b}\n'
+                f'    {"+ " + " " * (n-i-1)}^'
+            )
 
-            _o1 = self._and(v1_r[i], v2_r[i])
-            _o2 = self._and(_s1, _i)
-            _o3 = self._xor(_o1, _o2)
+            _sum = self._xor(
+                self._xor(bin_a_re[i], bin_b_re[i]),
+                _carry_in,
+            )
 
-            result += _s2
-            if i == lv - 1 and _o3 != '0':
-                result += _o3
+            _carry_out = self._or(
+                self._and(bin_a_re[i], bin_b_re[i]),
+                self._and(
+                    self._xor(bin_a_re[i], bin_b_re[i]),
+                    _carry_in,
+                ),
+            )
+
+            result += _sum
+            if i == n - 1 and _carry_out != '0':
+                result += _carry_out
             
-            print(f'    {" " + "-" * (lv+1)}\n'
-                  f'    {" " * (lv+2-len(result))}{result[::-1]} ({_o3})\n'
-                  f'    calculating sum digit:\n'
-                  f'        XOR of {v1_r[i]} and {v2_r[i]} as s1 is {_s1},\n'
-                  f'        XOR of s1 {_s1} and carry-in {_i} as sum digit is {_s2}\n'
-                  f'    calculating carry-out digit:\n'
-                  f'        AND of {v1_r[i]} and {v2_r[i]} is o1 {_o1},\n'
-                  f'        AND of s1 {_s1} and carry-in {_i} as o2 is {_o2},\n'
-                  f'        XOR of o1 {_o1} and o2 {_o2} as carry-out digit is {_o3}')
+            print(
+                f'    {" " + "-" * (n+1)}\n'
+                f'    {" " * (n+2-len(result))}{result[::-1]} ({_carry_out})\n'
+                f'    sum       = {bin_a_re[i]} ^ {bin_b_re[i]} ^ {_carry_in} = {_sum}\n'
+                f'    carry-out = ({bin_a_re[i]} & {bin_b_re[i]}) | (({bin_a_re[i]} ^ {bin_b_re[i]}) & {_carry_in}) = {_carry_out}'
+            )
 
-            _i = _o3
-        
+            _carry_in = _carry_out
+
         result_str = result[::-1]
         result_bin = self._trim_start(result_str)
         result_int = int('0b' + result_bin, 2)
