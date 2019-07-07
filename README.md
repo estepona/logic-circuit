@@ -5,7 +5,7 @@ simulation of essential combinational logic circuits with boolean algebra
 
 ## Half Adder
 ```console
-$python main.py --half-add --nums 1 1
+$ python main.py --half-add --nums 1 1
 half adder adding 1 and 1...
 
   1
