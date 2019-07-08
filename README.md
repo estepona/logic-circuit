@@ -1,5 +1,7 @@
 # logic circuit
-simulation of essential combinational logic circuits with boolean algebra
+Simulation of essential combinational logic circuits with boolean algebra.
+
+Supports adding and subtracting intergers >= 0
 
 # Examples
 
