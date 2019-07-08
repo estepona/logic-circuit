@@ -25,6 +25,9 @@ def main():
     elif args.half_subtract:
         hs = HalfSubtractor()
         hs.subtract(a, b)
+    elif args.full_subtract:
+        fs = FullSubtractor()
+        fs.subtract(a, b)
 
 
 if __name__ == '__main__':

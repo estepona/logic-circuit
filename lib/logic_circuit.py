@@ -32,12 +32,14 @@ class LogicCircuit:
         return (a, b)
 
     def _trim_start(self, n: str) -> str:
+        pos = -1
+
         for i in range(len(n)):
             if n[i] == '1':
                 pos = i
                 break
 
-        return n[pos:]
+        return n[pos:] if pos != -1 else '0'
 
     def _and(self, a: str, b: str) -> str:
         assert LogicCircuit.is_binary(a), ValueError('input should be 0 or 1')

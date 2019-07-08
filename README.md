@@ -99,3 +99,63 @@ Equations:
 difference = 0 XOR 1 = 1
 borrow-out = (1 - 0) AND 1 = 1
 ```
+
+## Full Subtractor
+```console
+$ python main.py --full-subtract --nums 16 5
+Full Subtractor subtracting 16 and 5...
+    binary of 16: 10000
+    binary of  5: 00101
+
+Operators:
+    & = AND
+    ^ = XOR
+    | = OR
+
+Equations:
+    Difference = A ^ B ^ Borrow-In
+    Borrow-Out = ((1 - A) & B) | ((1 - (A ^ B)) & Borrow-In)
+
+step 1:
+      10000
+      00101
+    -     ^
+     ------
+          1 (1)
+    difference = 0 ^ 1 ^ 0 = 1
+    borrow-out = (1 - (0 & 1)) | ((1 - (0 ^ 1)) & 0) = 1
+step 2:
+      10000
+      00101
+    -    ^
+     ------
+         11 (1)
+    difference = 0 ^ 0 ^ 1 = 1
+    borrow-out = (1 - (0 & 0)) | ((1 - (0 ^ 0)) & 1) = 1
+step 3:
+      10000
+      00101
+    -   ^
+     ------
+        011 (1)
+    difference = 0 ^ 1 ^ 1 = 0
+    borrow-out = (1 - (0 & 1)) | ((1 - (0 ^ 1)) & 1) = 1
+step 4:
+      10000
+      00101
+    -  ^
+     ------
+       1011 (1)
+    difference = 0 ^ 0 ^ 1 = 1
+    borrow-out = (1 - (0 & 0)) | ((1 - (0 ^ 0)) & 1) = 1
+step 5:
+      10000
+      00101
+    - ^
+     ------
+      01011 (0)
+    difference = 1 ^ 0 ^ 1 = 0
+    borrow-out = (1 - (1 & 0)) | ((1 - (1 ^ 0)) & 1) = 0
+
+final reslut: subtracting 16 and 5 in binary is 1011, converted to integer is 11
+```
