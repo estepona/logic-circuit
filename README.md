@@ -77,3 +77,25 @@ step 4:
 
 final reslut: adding 5 and 11 in binary is 10000, converted to integer is 16
 ```
+
+## Half Subtractor
+```console
+$ python main.py --half-subtract --nums 0 1
+Half Subtractor subtracting 0 and 1...
+
+Operators:
+    & = AND
+    ^ = XOR
+
+Equations:
+    Difference = A ^ B
+    Borrow-Out = (1 - A) & B
+
+  0
+  1
+- ^
+ --
+  1 (1)
+difference = 0 XOR 1 = 1
+borrow-out = (1 - 0) AND 1 = 1
+```

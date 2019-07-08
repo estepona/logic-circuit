@@ -1,6 +1,6 @@
 import argparse
 
-from lib import HalfAdder, FullAdder
+from lib import *
 
 
 def main():
@@ -22,6 +22,9 @@ def main():
     elif args.full_add:
         fa = FullAdder()
         fa.add(a, b)
+    elif args.half_subtract:
+        hs = HalfSubtractor()
+        hs.subtract(a, b)
 
 
 if __name__ == '__main__':
