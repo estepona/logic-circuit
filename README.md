@@ -1,7 +1,7 @@
 # logic circuit
 Simulation of essential combinational logic circuits with boolean algebra.
 
-Supports adding and subtracting intergers >= 0
+Supports adding and subtracting integers >= 0
 
 # Examples
 
