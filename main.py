@@ -1,6 +1,6 @@
 import argparse
 
-from lib import *
+from src import *
 
 
 def main():
