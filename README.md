@@ -1,6 +1,6 @@
-# logic circuit
+# Logic Circuit
 
-Simulation of essential combinational logic circuits with boolean algebra:
+Simulation of essential combinational logic circuits with boolean algebr:
 - half adder
 - full adder
 - half subtractor
