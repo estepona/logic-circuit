@@ -1,11 +1,16 @@
 # logic circuit
-Simulation of essential combinational logic circuits with boolean algebra.
+
+Simulation of essential combinational logic circuits with boolean algebra:
+- half adder
+- full adder
+- half subtractor
+- full subtractor
 
 Supports adding and subtracting integers >= 0
 
-# Examples
+## Examples
 
-## Half Adder
+### Half Adder
 ```console
 $ python main.py --half-add --nums 1 1
 Half Adder adding 1 and 1...
@@ -27,7 +32,7 @@ sum       = 1 XOR 1 = 0
 carry-out = 1 AND 1 = 1
 ```
 
-## Full Adder
+### Full Adder
 
 ```console
 $ python main.py --full-add --nums 5 11
@@ -80,7 +85,7 @@ step 4:
 final reslut: adding 5 and 11 in binary is 10000, converted to integer is 16
 ```
 
-## Half Subtractor
+### Half Subtractor
 ```console
 $ python main.py --half-subtract --nums 0 1
 Half Subtractor subtracting 0 and 1...
@@ -102,7 +107,7 @@ difference = 0 XOR 1 = 1
 borrow-out = (1 - 0) AND 1 = 1
 ```
 
-## Full Subtractor
+### Full Subtractor
 ```console
 $ python main.py --full-subtract --nums 16 5
 Full Subtractor subtracting 16 and 5...
